@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.silkscreen-bold {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* body background color */
+body {
+  background-color: rgb(226, 226, 226);
+  font-family: silkscreen, sans-serif;
+}
+
+/* btn font */
+button {
+  font-family: silkscreen, sans-serif;
+}
+
+/* grids */
+.container {
+  max-width: 400px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.displaycontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+.calculatornum {
+  max-width: 400px;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+
+.number-container {
+  display: grid;
+  grid-template-rows: minmax(40px, auto) minmax(40px, auto) minmax(40px, auto) minmax(40px, auto) minmax(40px, auto);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* number btns */
+.numbtn {
+  background-color: rgb(218, 191, 93);
+  color: rgb(0, 0, 0);
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  font-size: 23px;
+}
+
+/* mathbtn style */
+.mathbtn {
+  background-color: rgb(86, 96, 181);
+  color: white;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.equals {
+  background-color: rgb(86, 96, 181);
+  color: white;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+/* special style of 0 nad plus button */
+.plus {
+  grid-row: span 2;
+}
+
+.equals {
+  grid-column: span 2;
+}
+
+/* hover effect on buttons */
+.numbtn:hover, .mathbtn:hover, .equals:hover {
+  background-color: whitesmoke;
+}
+
+.mathbtn:hover {
+  color: black;
+}
