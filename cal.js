@@ -7,9 +7,11 @@ const mathButtons = document.querySelectorAll('.mathbtn');
 const clearButton = document.querySelector('.mathbtn[value="ac"]');
 const deleteButton = document.querySelector('.mathbtn[value="del"]');
 
-let clearValue = 0;
+let clearValue = '0';
+let firstValue = null; //sencond modification to save the first value
 let lastOperation = null;
 let shouldResetDisplay = false;
+let isResultDisplayed =false; //track if there display the result
 
 //function to update the display
 function updateDisplay() {
@@ -21,15 +23,16 @@ function handleNumberClick(event) {
   const button = event.target;
   const value = button.value;
 
-  if (shouldResetDisplay) {
-    clearValue = '0';
+  if (shouldResetDisplay || isResultDisplayed) {
+    clearValue = value; //revalue the num to clearValue
     shouldResetDisplay = false;
-  }
-
-  if (clearValue === '0') {
-    clearValue = value;
+    isResultDisplayed = false;
   } else {
+    if (clearValue === '0') {
+    clearValue = value;
+    } else {
     clearValue += value;
+    }
   }
 
   updateDisplay();
@@ -40,17 +43,27 @@ function handleMathClick(event) {
   const button = event.target;
   const value = button.value;
   
-  switch(value) {
-    case '+':
-    case '-':
-    case '/':
-    case '*':
+  if (value === '+' || value === '-' || value === '*' || value === '/') {
       if (lastOperation !== null) {
         performCalculation();
       }
-      lastOperation = value;
-      break;
-    case 'ac':
+      firstValue = parseFloat(clearValue);//save firstvalue
+      lastOperation = value;//record current perform
+      shouldResetDisplay = true;//reset to input secondvalue
+  } else if(value === 'ac') {
+    clearValue = '0';
+    firstValue = null;
+    lastOperation = null;
+    updateDisplay();
+  } else if(value === 'del') {
+    clearValue = clearValue.slice(0, -1);
+   if(clearValue === '') {
+    clearValue = '0';
+  } 
+    updateDisplay();
+  }   
+}
+    /*     case 'ac':
       clearValue = '0';
       lastOperation = null;
       updateDisplay();
@@ -59,41 +72,40 @@ function handleMathClick(event) {
       clearValue = clearValue.slice(0, -1);
       if (clearValue === '') {
         clearValue = '0';
-      }
-      updateDisplay();
-      break;
-  }
-
-  lastInput.textContent = `${value}`;
-}
+      } */
+  
 
 // functionto perform calculate
 function performCalculation() {
-  const firstValue = parseFloat(clearValue) || 0;
   const secondValue = parseFloat(displayValue.textContent) || 0;
   let result;
 
-  switch (lastOperation) {
-    case '+':
-      result = firstValue + secondValue;
-      break;
-    case '-':
-      result = firstValue - secondValue;
-      break;
-    case '/':
-      result = secondValue === 0 ? 'Error' : firstValue / secondValue;
-      break;
-    case '*':
-      result = firstValue * secondValue;
-      break;
-    default:
-      result = secondValue;
-      break;
-  }
+  if(firstValue !== null) { //make sure there is an first value
+    switch (lastOperation) {
+      case '+':
+        result = firstValue + secondValue;
+        break;
+      case '-':
+        result = firstValue - secondValue;
+        break;
+      case '/':
+        result = secondValue === 0 ? 'Error' : firstValue / secondValue;
+        break;
+      case '*':
+        result = firstValue * secondValue;
+        break;
+      default:
+        result = secondValue;
+        return;//if there is no operate then return back
+    }
 
-  clearValue = result.toString();
-  lastOperation = null;
-  updateDisplay();
+    clearValue = result.toString(); //show the result
+    firstValue = null;//clear the first value
+    lastOperation = null;//reset the math
+    isResultDisplayed = true;//tag the result
+    updateDisplay();
+  }
+  lastInput.textContent = `${result}`;
 }
 
 // add event listeners to the buttons
