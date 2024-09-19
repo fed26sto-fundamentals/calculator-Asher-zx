@@ -46,7 +46,7 @@ button {
 
 .number-container {
   display: grid;
-  grid-template-rows: minmax(40px, auto) minmax(40px, auto) minmax(40px, auto) minmax(40px, auto) minmax(40px, auto);
+  grid-template-rows: minmax(50px, auto) minmax(50px, auto) minmax(50px, auto) minmax(50px, auto) minmax(50px, auto) minmax(50px, auto);
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 }
