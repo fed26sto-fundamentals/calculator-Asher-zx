@@ -123,6 +123,6 @@ clearButton.addEventListener('click', () => {
   handleMathClick({ target: clearButton});
 });
 
-deleteButton.addEventListener('click', () => {
+/* deleteButton.addEventListener('click', () => {
   handleMathClick({ target: deleteButton });
-});
+}); */
